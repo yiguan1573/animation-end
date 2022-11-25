@@ -1,0 +1,9 @@
+com\yiguan\bean\entity\DataResult.class
+com\yiguan\util\ResponseUtil.class
+com\yiguan\bean\entity\UserInfo.class
+com\yiguan\common\Constant.class
+com\yiguan\bean\entity\RoleInfo.class
+com\yiguan\bean\entity\MyPage.class
+com\yiguan\config\RedisConfig.class
+com\yiguan\bean\enums\ResponseCode.class
+com\yiguan\bean\entity\AuthorizationInfo.class

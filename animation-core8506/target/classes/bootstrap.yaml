@@ -1,0 +1,76 @@
+server:
+  port: 8506
+
+spring:
+  application:
+    name: animation-core
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  kafka:
+    bootstrap-servers: cloud1:9092,cloud2:9092,cloud3:9092
+    producer:
+      retries: 0
+      acks: all
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      properties:
+        group:
+          id: bulletGroup
+        session:
+          timeout:
+            ms: 120000
+        request:
+          timeout:
+            ms: 180000
+      enable-auto-commit: true
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 5
+    listener:
+      missing-topics-fatal: false
+      type: batch
+
+  redis:
+    host: 192.168.10.103
+    port: 6379
+    database: 1
+    password: 13594859505LW
+    jedis:
+      pool:
+        max-active: 8   #最大连接数
+        max-idle: 8     #最大空闲
+        min-idle: 0     #最小空闲
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.10.101:3306/animation?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 13594859505LW
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.10.101:3737 #配置Nacos地址
+        namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+      config:
+        server-addr: 192.168.10.101:3737 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEFAULT_GROUP
+        namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+minio:
+  endpoint: http://192.168.10.102:9010
+  accessKey: yiguan
+  secretKey: yiguan1573
+  bucketName: animation

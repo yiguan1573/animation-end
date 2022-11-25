@@ -1,0 +1,9 @@
+com\yiguan\exception\BlockHandler.class
+com\yiguan\consumerApplication.class
+com\yiguan\config\DataSourceProxyConfig.class
+com\yiguan\config\MyBatisConfig.class
+com\yiguan\controller\users\TestController.class
+com\yiguan\exception\FallbackHandler.class
+com\yiguan\config\ApplicationContextConfig.class
+com\yiguan\service\users\TestService.class
+com\yiguan\config\FeignConfig.class

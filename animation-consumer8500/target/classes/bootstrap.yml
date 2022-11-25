@@ -1,0 +1,65 @@
+server:
+  port: 8500
+
+spring:
+  application:
+    name: animation-consumer
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.10.101:3306/animation?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 13594859505LW
+  cloud:
+    alibaba:
+      seata:
+        #自定义事务组名称需要与seata-server中的对应
+        tx-service-group: fsp_tx_group
+    sentinel:
+      transport:
+        dashboard: 192.168.10.102:8080 #配置Sentinel dashboard地址
+        port: 8719 #启动一个 Http Server,该 Server 会与 Sentinel 控制台做交互
+        clientIp: 192.168.31.169
+      eager: true #取消Sentinel控制台懒加载
+      datasource: #<---------------------------关注点，添加Nacos数据源配置
+        ds1:
+          nacos:
+            server-addr: 192.168.10.101:3737
+            dataId: ${spring.application.name}-flow-rules.json
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+            namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+    nacos:
+      discovery:
+        server-addr: 192.168.10.101:3737 #配置Nacos地址
+        namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+      config:
+        server-addr: 192.168.10.101:3737 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEFAULT_GROUP
+        namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+service-url:
+    users-service: http://animation-users
+feign:
+  sentinel:
+    enabled: true # 激活Sentinel对Feign的支持
+logging:
+  level:
+    # feign日志以什么级别监控哪个接口
+    com.yiguan.controller.users.testController: debug
+    io:
+      seata: info
+#设置feign客户端超时时间(OpenFeign默认支持ribbon)(单位：毫秒)
+ribbon:
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectTimeout: 5000
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

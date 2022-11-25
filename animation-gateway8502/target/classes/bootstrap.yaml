@@ -1,0 +1,56 @@
+server:
+  port: 8502
+
+spring:
+  application:
+    name: animation-gateway
+  redis:
+    host: 192.168.10.103
+    port: 6379
+    database: 0
+    password: 13594859505LW
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.10.101:3306/animation?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 13594859505LW
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.10.101:3737 #配置Nacos地址
+        namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+      config:
+        server-addr: 192.168.10.101:3737 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEFAULT_GROUP
+        namespace: f4d705e4-4a68-48ff-b073-0974b0c9db36
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+      - id: animation-users-route #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名
+        #uri: http://localhost:8001          #匹配后提供服务的路由地址
+        uri: lb://animation-users #匹配后提供服务的路由地址
+        predicates:
+        - Path=/users/**     # 断言，路径相匹配的进行路由
+      - id: animation-auth-route
+        uri: lb://animation-auth
+        predicates:
+        - Path=/login,/logout,/oauth/**
+      - id: animation-core-route2
+        uri: lb:ws://animation-core
+        predicates:
+        - Path=/websocket/**
+      - id: animation-core-route
+        uri: lb://animation-core
+        predicates:
+        - Path=/animation/**,/core/**,/common/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+ignore:
+  url: /getConfig,/login,/logout,/users/getMessage,/users/register,/users/changeData,/animation/uploadUserImage,/common/**,/animation/getCarouselList,/websocket/**

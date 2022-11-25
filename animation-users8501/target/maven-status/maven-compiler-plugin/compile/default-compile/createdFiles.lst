@@ -1,0 +1,14 @@
+com\yiguan\config\RestTemplateConfig.class
+com\yiguan\util\Oauth2Utils.class
+com\yiguan\controller\UserController.class
+com\yiguan\bean\dto\ChangeRoleDto.class
+com\yiguan\testController.class
+com\yiguan\bean\vo\UserListVo.class
+com\yiguan\UsersApplication.class
+com\yiguan\dao\RoleInfoMapper.class
+com\yiguan\config\MybatisPlusConfig.class
+com\yiguan\dao\UserInfoMapper.class
+com\yiguan\dao\AuthorizationInfoMapper.class
+com\yiguan\service\impl\UserServiceImpl.class
+com\yiguan\service\UserService.class
+com\yiguan\bean\vo\RoleListVo.class

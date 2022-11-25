@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/animation-auth8505" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/animation-commons" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/animation-consumer8500" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/animation-core8506" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/animation-gateway8502" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/animation-users8501" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
