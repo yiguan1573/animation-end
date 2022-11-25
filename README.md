@@ -186,6 +186,6 @@ alter table user_info
 ```
 
 ## 服务部署情况
-101 nginx:3737 	nacos	mysql kafka zookeeper
-102 nacos	sentinel:8080	minio:9010  kafka zookeeper
+101 nginx:3737 	nacos	mysql kafka zookeeper  
+102 nacos	sentinel:8080	minio:9010  kafka zookeeper  
 103 nacos	seata:8091   redis:6379 kafka zookeeper
